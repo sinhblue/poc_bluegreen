@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <section class="hero">
+    <h1>Aurora blue/green upgrade demo</h1>
+    <p class="subtitle">Use this dashboard to verify Postgres connectivity, inspect table volumes, and simulate a blue/green environment switch.</p>
+    <div class="status-card">
+      <strong>Current environment:</strong>
+      <span class="badge">{{ state.active | upper }}</span>
+    </div>
+    <div class="grid">
+      <div class="card summary-card">
+        <h2>Status check</h2>
+        <p>Launch a readiness check before an upgrade to capture connectivity and table volumes.</p>
+        <button id="run-check" class="btn">Run upgrade check</button>
+      </div>
+      <div class="card summary-card">
+        <h2>Simulate switch</h2>
+        <p>Toggle the active deployment alias for blue/green readiness validation.</p>
+        <button id="switch-btn" class="btn secondary">Switch deployment</button>
+      </div>
+    </div>
+
+    <section id="result-section" class="result-section hidden">
+      <h3>Check results</h3>
+      <pre id="result-output">Loading...</pre>
+    </section>
+  </section>
+{% endblock %}

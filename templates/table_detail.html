@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h1>Sample rows for {{ table_name }}</h1>
+  <p>Review a small sample of current records from the selected table.</p>
+  <div class="table-container">
+    {% if items %}
+      <table>
+        <thead>
+          <tr>
+            {% for col in items[0].__table__.columns.keys() %}
+              <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+            <tr>
+              {% for col in item.__table__.columns.keys() %}
+                <td>{{ getattr(item, col) }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No sample rows available.</p>
+    {% endif %}
+  </div>
+{% endblock %}

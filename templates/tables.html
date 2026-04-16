@@ -1,0 +1,22 @@
+{% extends 'layout.html' %}
+{% block content %}
+  <h1>Table row counts</h1>
+  <p>Review table volumes useful for an upgrade cutover or data verification step.</p>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr><th>Table</th><th>Row count</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        {% for name, count in table_counts.items() %}
+          <tr>
+            <td>{{ name }}</td>
+            <td>{{ count }}</td>
+            <td><a class="link-btn" href="/table/{{ name }}">Browse</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

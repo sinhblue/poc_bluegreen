@@ -1,0 +1,25 @@
+body{margin:0;font-family:Inter,Segoe UI,system-ui,sans-serif;background:#f4f7fb;color:#1f2937}
+.container{max-width:1080px;margin:0 auto;padding:24px}
+.header{background:#ffffff;border-bottom:1px solid #e2e8f0}
+.header .container{display:flex;justify-content:space-between;align-items:center}
+.brand{text-decoration:none;color:#111827;font-size:1.25rem;font-weight:700}
+nav a{margin-left:16px;color:#4f46e5;text-decoration:none}
+.hero{padding:32px 0}
+.hero h1{margin:0;font-size:2.4rem}
+.subtitle{color:#4b5563;margin-top:8px;max-width:700px}
+.status-card{margin:20px 0;padding:16px;background:#eef2ff;border-left:4px solid #4338ca;border-radius:12px;display:inline-flex;gap:10px;align-items:center}
+.badge{padding:6px 12px;border-radius:999px;background:#4338ca;color:white;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:20px}
+.card{background:white;padding:20px;border-radius:18px;box-shadow:0 12px 30px rgba(15,23,42,0.06)}
+.summary-card h2{margin-top:0}
+.btn, .link-btn{display:inline-block;padding:10px 16px;border-radius:10px;border:none;text-decoration:none;color:white;background:#4338ca;cursor:pointer}
+.btn.secondary{background:#6d28d9}
+.result-section{margin-top:24px}
+.hidden{display:none}
+.preformatted{white-space:pre-wrap;background:#f8fafc;padding:18px;border-radius:12px;overflow-x:auto}
+.table-container{overflow-x:auto;margin-top:24px}
+table{width:100%;border-collapse:collapse;background:white;border:1px solid #e5e7eb}
+th, td{padding:12px;text-align:left;border-bottom:1px solid #e5e7eb}
+th{background:#f9fafb;font-weight:700}
+.link-btn{background:#2563eb}
+.footer{margin-top:40px;padding:16px 0;color:#6b7280}
