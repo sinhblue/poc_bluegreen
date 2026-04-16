@@ -120,7 +120,7 @@ def table_detail(table_name):
     model = mapper.get(table_name)
     if not model:
         return redirect(url_for('index'))
-    items = db.session.query(model).limit(25).all()
+    items = [obj_to_dict(row) for row in db.session.query(model).limit(25).all()]
     return render_template('table_detail.html', table_name=table_name, items=items)
 
 def obj_to_dict(obj):

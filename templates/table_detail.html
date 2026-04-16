@@ -7,7 +7,7 @@
       <table>
         <thead>
           <tr>
-            {% for col in items[0].__table__.columns.keys() %}
+            {% for col in items[0].keys() %}
               <th>{{ col }}</th>
             {% endfor %}
           </tr>
@@ -15,8 +15,8 @@
         <tbody>
           {% for item in items %}
             <tr>
-              {% for col in item.__table__.columns.keys() %}
-                <td>{{ getattr(item, col) }}</td>
+              {% for col in item.keys() %}
+                <td>{{ item[col] }}</td>
               {% endfor %}
             </tr>
           {% endfor %}
