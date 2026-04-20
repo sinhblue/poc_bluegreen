@@ -33,7 +33,7 @@ copy .env.example .env
 4. Update `.env` if needed. Example:
 
 ```text
-DATABASE_URL=postgresql://postgres:password@localhost:5432/aurora_poc
+DATABASE_URL=postgresql://postgres:password@localhost:5432/poc_bluegreen
 ```
 
 ## Run the app
@@ -47,8 +47,8 @@ python populate.py
    Or use raw SQL scripts with Postgres:
 
 ```powershell
-psql -d aurora_poc -f sql/schema.sql
-psql -d aurora_poc -f sql/seed_data.sql
+psql -d poc_bluegreen -f sql/schema.sql
+psql -d poc_bluegreen -f sql/seed_data.sql
 ```
 
 2. Start the Flask app:
