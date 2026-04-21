@@ -57,6 +57,12 @@ psql -d poc_bluegreen -f sql/seed_data.sql
 psql -d poc_bluegreen -f sql/additional_1m_rows.sql
 ```
 
+   For massive datasets (~6M rows per table, >>1GB storage):
+
+```powershell
+psql -d poc_bluegreen -f sql/additional_5m_rows.sql
+```
+
 2. Start the Flask app:
 
 ```powershell
@@ -130,6 +136,18 @@ Or use the SQL scripts directly:
 ```bash
 psql -d poc_bluegreen -f sql/schema.sql
 psql -d poc_bluegreen -f sql/seed_data.sql
+```
+
+For larger datasets (~1.2M rows per table):
+
+```bash
+psql -d poc_bluegreen -f sql/additional_1m_rows.sql
+```
+
+For massive datasets (~6M rows per table):
+
+```bash
+psql -d poc_bluegreen -f sql/additional_5m_rows.sql
 ```
 
 For larger datasets (~1.2M rows per table, >1GB storage):
