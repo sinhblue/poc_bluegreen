@@ -40,7 +40,7 @@ BEGIN
 
     -- Add 5,000,000 users
     INSERT INTO users (username, email, created_at)
-    SELECT 'user' || (max_user_id + gs), 'user' || (max_user_id + gs) || '@example.com', now() - (gs || ' days')::interval
+    SELECT 'user' || (max_user_id + gs), 'user' || (max_user_id + gs) || '@example.com', now() - ((gs % 3650) || ' days')::interval
     FROM generate_series(1,5000000) AS gs;
 
     -- Add 5,000,000 customers
@@ -49,7 +49,7 @@ BEGIN
       first_name || ' ' || last_name,
       lower(first_name || '.' || last_name) || (max_customer_id + gs) || '@example.com',
       (ARRAY['USA','Canada','UK','Australia','Germany','France','Netherlands','Japan','Brazil','India','Spain','Italy','Mexico','Sweden','South Korea','China','Russia','Argentina','South Africa','New Zealand'])[floor(random()*20+1)::int],
-      now() - (floor(random()*365)::int || ' days')::interval
+      now() - ((gs % 3650) || ' days')::interval
     FROM (
       SELECT
         (ARRAY['Alex','Jordan','Taylor','Morgan','Casey','Jamie','Avery','Riley','Cameron','Dana','Harper','Logan','Charlie','Quinn','Parker','Evelyn','Benjamin','Chloe','Samuel','Lily','Noah','Zoe','Caleb','Nora','Theo','Maya','Lucas','Madison','Jackson','Aubrey'])[floor(random()*30+1)::int] AS first_name,
@@ -72,14 +72,14 @@ BEGIN
 
     -- Add inventory rows for new products
     INSERT INTO inventory (product_id, quantity, updated_at)
-    SELECT id, inventory, now() - (floor(random()*90)::int || ' days')::interval
+    SELECT id, inventory, now() - ((gs % 3650) || ' days')::interval
     FROM products WHERE id > max_product_id;
 
     -- Add 5,000,000 orders
     INSERT INTO orders (customer_id, created_at, status)
     SELECT
       floor(random()*(max_customer_id + 5000000)+1)::int,
-      now() - (floor(random()*365)::int || ' days')::interval,
+      now() - ((gs % 3650) || ' days')::interval,
       (ARRAY['pending','processing','shipped','delivered','cancelled','refunded','on_hold','backordered'])[floor(random()*8+1)::int]
     FROM generate_series(1,5000000);
 
@@ -148,7 +148,7 @@ BEGIN
         'Perfect size and scale for the space it was intended for',
         'Outstanding quality that made the occasion truly special'
       ])[floor(random()*20+1)::int],
-      now() - (floor(random()*365)::int || ' days')::interval
+      now() - ((gs % 3650) || ' days')::interval
     FROM generate_series(1,5000000);
 
 END $$;
