@@ -7,19 +7,19 @@ variable "aws_region" {
 variable "vpc_id" {
   description = "VPC ID"
   type        = string
-  default     = "vpc-06bcde38007501e84"
+  default     = "vpc-021a80634dd148d1a"
 }
 
 variable "subnet_id" {
-  description = "Subnet ID for EC2"
+  description = "Subnet ID for EC2 instance"
   type        = string
-  default     = "subnet-0ef190560d1929b7e"
+  default     = "subnet-0c4e37d0a103363b2"
 }
 
 variable "rds_subnet_group" {
   description = "RDS subnet group name"
   type        = string
-  default     = "default"
+  default     = "participant-template-aupglabsrdsstack-126xul2qfircr-dbsubnets-birtmizhdygn"
 }
 
 variable "db_master_username" {

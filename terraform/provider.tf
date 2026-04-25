@@ -12,7 +12,7 @@ terraform {
     key            = "terraform/state.tfstate"
     region         = "ap-southeast-2"
     encrypt        = true
-    dynamodb_table = "terraform-locks"
+    use_lockfile   = true
   }
 }
 
@@ -24,7 +24,7 @@ provider "aws" {
       Project     = "POC Blue/Green"
       Environment = "dev"
       ManagedBy   = "Terraform"
-      CreatedAt   = timestamp()
+      CreatedAt   = "2026-04-24"
     }
   }
 }

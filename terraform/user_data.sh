@@ -22,35 +22,36 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 # Fetch DB password from Secrets Manager
-DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id poc-bluegreen-aurora-password --query SecretString --output text | jq -r '.password')
+DB_PASSWORD=$(aws secretsmanager get-secret-value --secret-id poc-bluegreen-aurora-password-20260424164309557300000001 --query SecretString --output text | jq -r '.password')
 
 # Wait until the Aurora endpoint is ready
 wait_for_db() {
   local host="$1"
-  local port="${2:-5432}"
+  local port="$2"
+  if [ -z "$port" ]; then port="5432"; fi
   local user="$3"
   local max_attempts=30
   local delay=10
   local attempt=1
 
-  echo "Waiting for database at ${host}:${port}..."
-  until PGPASSWORD="${DB_PASSWORD}" pg_isready -h "${host}" -p "${port}" -U "${user}" >/dev/null 2>&1; do
-    if [ "${attempt}" -ge "${max_attempts}" ]; then
+  echo "Waiting for database at $host:$port..."
+  until PGPASSWORD="$DB_PASSWORD" pg_isready -h "$host" -p "$port" -U "$user" >/dev/null 2>&1; do
+    if [ "$attempt" -ge "$max_attempts" ]; then
       echo "ERROR: database did not become ready after $((max_attempts * delay)) seconds"
       exit 1
     fi
     printf '.'
-    sleep "${delay}"
+    sleep "$delay"
     attempt=$((attempt + 1))
   done
-  echo "\nDatabase is ready."
+  echo -e "\nDatabase is ready."
 }
 
 wait_for_db "${db_endpoint}" 5432 "${db_user}"
 
 # Create .env file with database connection
 cat > .env <<EOF
-DATABASE_URL=postgresql://${db_user}:${DB_PASSWORD}@${db_endpoint}:5432/${db_name}
+DATABASE_URL=postgresql://${db_user}:$DB_PASSWORD@${db_endpoint}:5432/${db_name}
 SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_hex(32))')
 EOF
 

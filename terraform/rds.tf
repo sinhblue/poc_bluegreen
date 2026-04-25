@@ -20,6 +20,7 @@ resource "aws_secretsmanager_secret_version" "aurora_password" {
 resource "random_password" "aurora_password" {
   length  = 32
   special = true
+  override_special   = "!#$%&*()-_=+[]{}<>:?"
 }
 
 # RDS parameter group for Aurora PostgreSQL 14 - Cluster
@@ -29,8 +30,9 @@ resource "aws_rds_cluster_parameter_group" "aurora_pg14_cluster" {
   description = "Cluster parameter group for Aurora PostgreSQL 14 with logical replication"
 
   parameter {
-    name  = "rds.logical_replication"
-    value = "1"
+    name         = "rds.logical_replication"
+    value        = "1"
+    apply_method = "pending-reboot"
   }
 
   tags = {
@@ -44,11 +46,6 @@ resource "aws_db_parameter_group" "aurora_pg14_instance" {
   name        = "poc-aurora-pg-param-group-14-instance"
   description = "Instance parameter group for Aurora PostgreSQL 14 with logical replication"
 
-  parameter {
-    name  = "rds.logical_replication"
-    value = "1"
-  }
-
   tags = {
     Name = "poc-aurora-pg-param-group-14-instance"
   }
@@ -61,8 +58,9 @@ resource "aws_rds_cluster_parameter_group" "aurora_pg15_cluster" {
   description = "Cluster parameter group for Aurora PostgreSQL 15 with logical replication"
 
   parameter {
-    name  = "rds.logical_replication"
-    value = "1"
+    name         = "rds.logical_replication"
+    value        = "1"
+    apply_method = "pending-reboot"
   }
 
   tags = {
@@ -75,11 +73,6 @@ resource "aws_db_parameter_group" "aurora_pg15_instance" {
   family      = "aurora-postgresql15"
   name        = "poc-aurora-pg-param-group-15-instance"
   description = "Instance parameter group for Aurora PostgreSQL 15 with logical replication"
-
-  parameter {
-    name  = "rds.logical_replication"
-    value = "1"
-  }
 
   tags = {
     Name = "poc-aurora-pg-param-group-15-instance"

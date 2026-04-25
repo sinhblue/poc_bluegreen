@@ -1,5 +1,6 @@
 output "terraform_output_summary" {
   description = "Summary of all outputs"
+  sensitive   = true
   value = {
     ec2 = {
       instance_id = aws_instance.app_server.id
