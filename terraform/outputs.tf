@@ -14,6 +14,13 @@ output "terraform_output_summary" {
       engine_version          = aws_rds_cluster.aurora_cluster.engine_version
       master_username         = var.db_master_username
     }
+    aurora_tf = {
+      cluster_endpoint        = aws_rds_cluster.aurora_cluster_tf.endpoint
+      cluster_reader_endpoint = aws_rds_cluster.aurora_cluster_tf.reader_endpoint
+      database_name           = aws_rds_cluster.aurora_cluster_tf.database_name
+      engine_version          = aws_rds_cluster.aurora_cluster_tf.engine_version
+      master_username         = var.db_master_username
+    }
     secrets = {
       password_secret_name = aws_secretsmanager_secret.aurora_password.name
     }
@@ -22,6 +29,8 @@ output "terraform_output_summary" {
       pg14_instance_param_group  = aws_db_parameter_group.aurora_pg14_instance.name
       pg15_cluster_param_group   = aws_rds_cluster_parameter_group.aurora_pg15_cluster.name
       pg15_instance_param_group  = aws_db_parameter_group.aurora_pg15_instance.name
+      pg16_cluster_param_group   = aws_rds_cluster_parameter_group.aurora_pg16_cluster.name
+      pg16_instance_param_group  = aws_db_parameter_group.aurora_pg16_instance.name
     }
     security = {
       ec2_security_group_id    = aws_security_group.ec2_sg.id

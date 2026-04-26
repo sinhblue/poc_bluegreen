@@ -50,7 +50,7 @@ variable "aurora_instance_type" {
 variable "aurora_engine_version" {
   description = "Aurora PostgreSQL engine version"
   type        = string
-  default     = "14.17"
+  default     = "15.17"
 }
 
 variable "db_cluster_identifier" {
